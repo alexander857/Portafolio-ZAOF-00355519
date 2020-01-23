@@ -49,8 +49,9 @@ int main(){
 			case 2: BorrarAct(); break;
 			case 3: BorrarTodasAct(); break;
 			case 4: VerActividades(); break;
-			case 5: continuar = false;
-			default: cout << "Opcion invalida!\n"; break;
+			case 5: continuar = false; break;
+			default: 
+				cout << "\nOpcion invalida!\n"; break;
 		}
 		
 	}while(continuar);
@@ -81,23 +82,32 @@ void InsertarAct(){
 void BorrarAct(){
 	LimiteEntreFunciones(); //dibuja el limite entre menus
 	
-	//eliminando una actividad
-	ACTI actividadABorrar = AGENDA.ACTIVIDADES.front();
-	cout << "\nActividad a eliminar: " << actividadABorrar.titulo;
-	cout << "\nTrataba sobre: " << actividadABorrar.descripcion;
-	cout << "\nDuracion (min): " << actividadABorrar.DuracionMin << endl;
-	
-	int opcion = 0;
-	cout << "\nSEGURO QUE DESEA ELIMINAR LA ACTIVIDAD?\n";
-	cout << "\n1-Si, ya la he realizado\n";
-	cout << "2-No, aun no la he realizado\n";
-	cout << "\nOpcion: "; cin >> opcion;
-	
-	if(opcion == 1){
-		//eliminando la actividad
-		AGENDA.ACTIVIDADES.pop();
-		cout << "\nLA ACTIVIDAD [" << actividadABorrar.titulo << "] HA SIDO ELIMINADA!\n";
-		AGENDA.actividadesRealizadas++;
+	if(AGENDA.ACTIVIDADES.empty()){
+		
+		cout << "\nNO HAY ACTIVIDADES INGRESADAS!" << endl;
+		
+	}
+	else{
+		
+		//eliminando una actividad
+		ACTI actividadABorrar = AGENDA.ACTIVIDADES.front();
+		cout << "\nActividad a eliminar: " << actividadABorrar.titulo;
+		cout << "\nTrataba sobre: " << actividadABorrar.descripcion;
+		cout << "\nDuracion (min): " << actividadABorrar.DuracionMin << endl;
+		
+		int opcion = 0;
+		cout << "\nSEGURO QUE DESEA ELIMINAR LA ACTIVIDAD?\n";
+		cout << "\n1-Si, ya la he realizado\n";
+		cout << "2-No, aun no la he realizado\n";
+		cout << "\nOpcion: "; cin >> opcion;
+		
+		if(opcion == 1){
+			//eliminando la actividad
+			AGENDA.ACTIVIDADES.pop();
+			cout << "\nLA ACTIVIDAD [" << actividadABorrar.titulo << "] HA SIDO ELIMINADA!\n";
+			AGENDA.actividadesRealizadas++;
+		}
+		
 	}
 
 	LimiteEntreFunciones(); //dibuja el limite entre menus
@@ -108,22 +118,32 @@ void BorrarTodasAct(){
 	char opcion = 0;
 	LimiteEntreFunciones(); //dibuja el limite entre menus
 	
-	cout << "\nESTA SEGURO QUE QUIERE ELIMINAR TODAS LAS ACTIVIDADES?\n";
-	cout << "\nS-Si, estoy seguro!\n";
-	cout << "Si no esta seguro presione cualquier tecla!\n";
-	cout << "\nOpcion: "; cin >> opcion;
-	
-	if(opcion == 's' || opcion == 'S'){
+	if(AGENDA.ACTIVIDADES.empty()){
 		
-		cout << "\nActividades totales eliminadas: " << AGENDA.ACTIVIDADES.size() << endl;
-	
-		while(!AGENDA.ACTIVIDADES.empty()){		
-			//eliminando todas las actividades
-			AGENDA.ACTIVIDADES.pop();
-			AGENDA.actividadesRealizadas++;
-		}
-		cout << "\nSE HAN ELIMINADOS TODAS LAS ACTIVIDADES!" << endl;
+		cout << "\nNO HAY ACTIVIDADES INGRESADAS!" << endl;
+		
 	}
+	else{
+		
+		cout << "\nESTA SEGURO QUE QUIERE ELIMINAR TODAS LAS ACTIVIDADES?\n";
+		cout << "\nS-Si, estoy seguro!\n";
+		cout << "Si no esta seguro presione cualquier tecla!\n";
+		cout << "\nOpcion: "; cin >> opcion;
+		
+		if(opcion == 's' || opcion == 'S'){
+			
+			cout << "\nActividades totales eliminadas: " << AGENDA.ACTIVIDADES.size() << endl;
+		
+			while(!AGENDA.ACTIVIDADES.empty()){		
+				//eliminando todas las actividades
+				AGENDA.ACTIVIDADES.pop();
+				AGENDA.actividadesRealizadas++;
+			}
+			cout << "\nSE HAN ELIMINADOS TODAS LAS ACTIVIDADES!" << endl;
+		}
+		
+	}
+
 	
 	LimiteEntreFunciones(); //dibuja el limite entre menus
 }
